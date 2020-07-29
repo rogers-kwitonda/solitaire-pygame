@@ -17,15 +17,12 @@ def game():
     deck.shuffle()
     deck.deal()
 
-    selected_card = []
-    selected_pile = None
-
     # Game Loop
     run = True
 
     while run:
         #Draw background
-        win.fill((0,0,100))
+        win.fill(GREEN)
 
         # Check for win
         if deck.check_win():
@@ -54,6 +51,9 @@ def game():
             for card in pile.cards:
                 win.blit(card.get_image(), (card.x, card.y))
 
+        # Draw selected cards
+        draw_selected(deck.selected_cards)
+
         # Event loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -73,7 +73,12 @@ def game():
         pygame.display.update()
 
 
-
+def draw_selected(selected):
+    if len(selected) > 0:
+        count = len(selected) -1
+        pygame.draw.rect(win, BLUE,(selected[0].x,selected[0].y,CARD_WIDTH, CARD_HEIGHT + SHOWING_HEIGHT*count),8)
+        for card in selected:
+            win.blit(card.get_image(), (card.x, card.y))
 
 
 def start_graphic(window):
@@ -97,11 +102,12 @@ def start_screen():
     instruction_font = pygame.font.Font('freesansbold.ttf',32)
 
 
-    instruction = instruction_font.render('Place SPACE to start', True,RED)
+    instruction = instruction_font.render('Press SPACE to start', True,RED)
     instruction_rect = instruction.get_rect()
     instruction_rect.center = (WIDTH//2, HEIGHT - 200)
 
     run = True
+
     while run:
         win.fill(GREEN)
         
@@ -125,6 +131,4 @@ def start_screen():
 
 
 
-
-#start_screen()
-game()
+start_screen()

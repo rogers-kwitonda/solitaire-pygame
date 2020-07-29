@@ -54,6 +54,9 @@ class Deck:
                 return False
         return True
 
+    def auto_complete(self):
+        pass
+
     def process_click(self, pos):
         if not self.selected:
             # Player selects cards
