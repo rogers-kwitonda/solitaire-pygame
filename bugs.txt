@@ -1,1 +1,0 @@
-*   moving cards from tableau 1 to another results in failed move

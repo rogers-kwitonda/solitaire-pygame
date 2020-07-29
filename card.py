@@ -7,7 +7,7 @@ class Card:
         self.rank = rank
         self.suit = suit
         self.image = pygame.transform.scale(pygame.image.load('./cards/'+image), (CARD_WIDTH, CARD_HEIGHT))
-        self.back = pygame.transform.scale(pygame.image.load('./back.png'), (CARD_WIDTH, CARD_HEIGHT))
+        self.back = pygame.transform.scale(pygame.image.load('./cards/back.png'), (CARD_WIDTH, CARD_HEIGHT))
         self.showing = False
         self.x = 0
         self.y = 0
@@ -20,8 +20,13 @@ class Card:
     def __str__(self):
         return "{} of {}: {}".format(self.rank, self.suit, self.color)
 
-    def is_clicked(self, pos):
+    def is_clicked_top(self, pos):
         if (pos[0] >= self.x and pos[0] <= self.x + CARD_WIDTH) and (pos[1] >= self.y and pos[1] <= self.y + SHOWING_HEIGHT):
+            return True
+        return False
+    
+    def is_clicked(self, pos):
+        if (pos[0] >= self.x and pos[0] <= self.x + CARD_WIDTH) and (pos[1] >= self.y and pos[1] <= self.y + CARD_HEIGHT):
             return True
         return False
 
